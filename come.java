@@ -7,34 +7,47 @@ import java.awt.event.*;
 import javax.swing.event.*;
 import java.io.*;
 
+//Things left to do: 
+// Make buttons 
+// Make ball fall up and down with animation 
+// the JFrame property setter can be replaced when we have the animation panel working. 
+
 public class come implements ActionListener, ChangeListener{
+	// NOTE: When naming variabels, use lower camel capitalization 
+	// E.g firstName, lastName
 	// Properties
 	JFrame theframe = new JFrame("Conservation of Mechanical Energy");
 	JPanel thepanel = new JPanel();
 	// buttons
-	JButton runbutton = new JButton();
-	JButton resetbutton = new JButton();
-	JMenu mainmenu = new JMenu("Main");
-	JMenuBar thebar = new JMenuBar();
-	JMenuItem aboutitem = new JMenuItem("About");
-	JMenuItem helpitem = new JMenuItem("Help");
-	JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-
+	JButton runButton = new JButton();
+	JButton resetButton = new JButton();
+	JButton mainMenu = new JButton("Main");
+	JMenuBar theBar = new JMenuBar();
+	JButton aboutItem = new JButton("About");
+	JButton helpItem = new JButton("Help");
+	JSlider sliderVel = new JSlider(JSlider.HORIZONTAL, 0, 25, 12);
 	
 	//labels
-	JLabel vlabel = new JLabel("Enter velocity: ");
-	JLabel mlabel = new JLabel("Enter mass: ");
-	JLabel hlabel = new JLabel();
-	JLabel maxhlabel = new JLabel();
+	JLabel vLabel = new JLabel("Enter velocity: ");
+	JLabel mLabel = new JLabel("Enter mass: ");
+	JLabel hLabel = new JLabel();
+	JLabel MaxHLabel = new JLabel();
 	
 	// Methods
 	public void actionPerformed(ActionEvent evt){
-		if(evt.getSource() == aboutitem){
-		
+		if(evt.getSource() == aboutItem){
+			System.out.println("about");
+			//Replace frame with new panel. 
+		}
+		if(evt.getSource() == helpItem){
+			System.out.println("help");
+		}
+		if(evt.getSource() == mainMenu){
+			System.out.println("menu");
 		}
 	}
 	public void stateChanged(ChangeEvent evt){
-		System.out.println(slider.getValue());
+		System.out.println(sliderVel.getValue());
 		
 	}
 	
@@ -42,41 +55,43 @@ public class come implements ActionListener, ChangeListener{
 	public come(){
 		thepanel.setLayout(null);
 		thepanel.setPreferredSize(new Dimension(960, 540));
-		thebar.setLayout(null);
-		aboutitem.setSize(20,20);
-		aboutitem.setLocation(0,0);
+
 		
 		// Buttons constructor
 		
-		// Slider 
-		 slider.setBounds(200, 100, 200, 50);
-		slider.setLocation(200,100);
-		slider.setMajorTickSpacing(10);
-        slider.setMinorTickSpacing(1);
-        slider.setPaintTicks(true);
-        slider.setPaintLabels(true);
+		
+		// Slider (You need all this code for the slider to appear);
+		sliderVel.setBounds(200, 100, 200, 50);
+		sliderVel.setLocation(670,100);
+		sliderVel.setMajorTickSpacing(5);
+        sliderVel.setMinorTickSpacing(1);
+        sliderVel.setPaintTicks(true);
+        sliderVel.setPaintLabels(true);
         theframe.setVisible(true);
-		thepanel.add(slider);
+		thepanel.add(sliderVel);
 		
 		// Labels Constructor
-		vlabel.setSize(300, 200);
-		vlabel.setLocation(670, 30);
-		thepanel.add(vlabel);
+		vLabel.setSize(100, 100);
+		vLabel.setLocation(675, 40);
+		thepanel.add(vLabel);
 		
-		mlabel.setSize(300, 200);
-		mlabel.setLocation(670, 150);
-		thepanel.add(mlabel);
+		mLabel.setSize(300, 200);
+		mLabel.setLocation(670, 150);
+		thepanel.add(mLabel);
 		
 		// Frame constructor
-		theframe.setJMenuBar(thebar);
-		thebar.add(mainmenu);
-		thebar.add(aboutitem);
-		thebar.add(helpitem);
+		theframe.setJMenuBar(theBar);
+		theBar.add(mainMenu);
+		theBar.add(aboutItem);
+		theBar.add(helpItem);
 		
-		slider.addChangeListener(this);
-		aboutitem.addActionListener(this);
-		helpitem.addActionListener(this);
+		// Adding Functions to Components
+		sliderVel.addChangeListener(this);
+		aboutItem.addActionListener(this);
+		helpItem.addActionListener(this);
+		mainMenu.addActionListener(this);
 		
+		// Frame
 		theframe.setContentPane(thepanel);
 		theframe.pack();
 		theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

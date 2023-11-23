@@ -17,15 +17,16 @@ public class come implements ActionListener, ChangeListener{
 	// E.g firstName, lastName
 	// Properties
 	JFrame theframe = new JFrame("Conservation of Mechanical Energy");
-	JPanel thepanel = new JPanel();
+	JPanel thePanel = new JPanel();
 	// buttons
-	JButton runButton = new JButton();
-	JButton resetButton = new JButton();
+	JButton fireButton = new JButton("Fire");
+	JButton resetButton = new JButton("Reset");
 	JButton mainMenu = new JButton("Main");
 	JMenuBar theBar = new JMenuBar();
 	JButton aboutItem = new JButton("About");
 	JButton helpItem = new JButton("Help");
 	JSlider sliderVel = new JSlider(JSlider.HORIZONTAL, 0, 25, 12);
+	JSlider sliderMass = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
 	
 	//labels
 	JLabel vLabel = new JLabel("Enter velocity: ");
@@ -48,17 +49,25 @@ public class come implements ActionListener, ChangeListener{
 	}
 	public void stateChanged(ChangeEvent evt){
 		System.out.println(sliderVel.getValue());
+		System.out.println(sliderMass.getValue());
 		
 	}
 	
 	// Constructor: 
 	public come(){
-		thepanel.setLayout(null);
-		thepanel.setPreferredSize(new Dimension(960, 540));
+		thePanel.setLayout(null);
+		thePanel.setPreferredSize(new Dimension(960, 540));
 
 		
 		// Buttons constructor
-		
+		fireButton.setSize(190, 40);
+		fireButton.setLocation(670, 350);
+		fireButton.addActionListener(this);
+		thePanel.add(fireButton);
+		resetButton.setSize(190, 40);
+		resetButton.setLocation(670, 400);
+		resetButton.addActionListener(this);
+		thePanel.add(resetButton);
 		
 		// Slider (You need all this code for the slider to appear);
 		sliderVel.setBounds(200, 100, 200, 50);
@@ -68,16 +77,24 @@ public class come implements ActionListener, ChangeListener{
         sliderVel.setPaintTicks(true);
         sliderVel.setPaintLabels(true);
         theframe.setVisible(true);
-		thepanel.add(sliderVel);
+		thePanel.add(sliderVel);
+		sliderMass.setBounds(200, 100, 200, 50);
+		sliderMass.setLocation(670,180);
+		sliderMass.setMajorTickSpacing(10);
+        sliderMass.setMinorTickSpacing(2);
+        sliderMass.setPaintTicks(true);
+        sliderMass.setPaintLabels(true);
+        theframe.setVisible(true);
+		thePanel.add(sliderMass);
 		
 		// Labels Constructor
 		vLabel.setSize(100, 100);
 		vLabel.setLocation(675, 40);
-		thepanel.add(vLabel);
+		thePanel.add(vLabel);
 		
 		mLabel.setSize(300, 200);
-		mLabel.setLocation(670, 150);
-		thepanel.add(mLabel);
+		mLabel.setLocation(670, 70);
+		thePanel.add(mLabel);
 		
 		// Frame constructor
 		theframe.setJMenuBar(theBar);
@@ -92,7 +109,7 @@ public class come implements ActionListener, ChangeListener{
 		mainMenu.addActionListener(this);
 		
 		// Frame
-		theframe.setContentPane(thepanel);
+		theframe.setContentPane(thePanel);
 		theframe.pack();
 		theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theframe.setResizable(false);

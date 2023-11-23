@@ -18,6 +18,7 @@ public class come implements ActionListener, ChangeListener{
 	// Properties
 	JFrame theframe = new JFrame("Conservation of Mechanical Energy");
 	JPanel thePanel = new JPanel();
+	JPanel aboutpanel = new JPanel();
 	// buttons
 	JButton fireButton = new JButton("Fire");
 	JButton resetButton = new JButton("Reset");
@@ -33,18 +34,36 @@ public class come implements ActionListener, ChangeListener{
 	JLabel mLabel = new JLabel("Enter mass: ");
 	JLabel hLabel = new JLabel();
 	JLabel MaxHLabel = new JLabel();
+	JLabel aboutLabel = new JLabel("Sam and Jason were the programmers of this simulation. This was thanks to the ICS4U1 Computer Science class by Mr. Cadawas. ");
 	
 	// Methods
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == aboutItem){
 			System.out.println("about");
 			//Replace frame with new panel. 
+			theframe.setContentPane(aboutpanel);
+			aboutLabel.setSize(300, 200);
+			aboutLabel.setLocation(10, 10);
+			aboutpanel.add(aboutLabel);
+			aboutpanel.repaint();
+			theframe.repaint();
+			theframe.setVisible(true);
 		}
 		if(evt.getSource() == helpItem){
 			System.out.println("help");
 		}
 		if(evt.getSource() == mainMenu){
 			System.out.println("menu");
+			theframe.setContentPane(thePanel);
+			thePanel.repaint();
+			theframe.repaint();
+			theframe.setVisible(true);
+		}
+		if(evt.getSource() == fireButton){
+			System.out.println("fire");
+		}
+		if(evt.getSource() == resetButton){
+			System.out.println("reset");
 		}
 	}
 	public void stateChanged(ChangeEvent evt){
@@ -64,6 +83,7 @@ public class come implements ActionListener, ChangeListener{
 		fireButton.setLocation(670, 350);
 		fireButton.addActionListener(this);
 		thePanel.add(fireButton);
+		
 		resetButton.setSize(190, 40);
 		resetButton.setLocation(670, 400);
 		resetButton.addActionListener(this);
@@ -104,6 +124,7 @@ public class come implements ActionListener, ChangeListener{
 		
 		// Adding Functions to Components
 		sliderVel.addChangeListener(this);
+		sliderMass.addChangeListener(this);
 		aboutItem.addActionListener(this);
 		helpItem.addActionListener(this);
 		mainMenu.addActionListener(this);

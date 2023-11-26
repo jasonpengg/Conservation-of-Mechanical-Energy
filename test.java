@@ -12,7 +12,7 @@ import java.io.*;
 // Make ball fall up and down with animation 
 // the JFrame property setter can be replaced when we have the animation panel working. 
 
-public class come implements ActionListener, ChangeListener{
+public class test implements ActionListener, ChangeListener{
 	// NOTE: When naming variables, use lower camel capitalization 
 	// E.g firstName, lastName
 	// Properties
@@ -28,6 +28,7 @@ public class come implements ActionListener, ChangeListener{
 	JButton helpItem = new JButton("Help");
 	JSlider sliderVel = new JSlider(JSlider.HORIZONTAL, 0, 25, 12);
 	JSlider sliderMass = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
+	Timer thetimer = new Timer(1000/45, this);
 	
 	//labels
 	JLabel vLabel = new JLabel("Enter velocity: ");
@@ -36,14 +37,12 @@ public class come implements ActionListener, ChangeListener{
 	JLabel MaxHLabel = new JLabel();
 	JLabel aboutLabel = new JLabel("Sam and Jason were the programmers of this simulation. This was thanks to the ICS4U1 Computer Science class by Mr. Cadawas. ");
 	
-	Timer thetimer = new Timer(1000/45, this);
-	
 	// Methods
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == aboutItem){
 			System.out.println("about");
 			//Replace frame with new panel. 
-			theframe.setContentPane(aboutpanel);
+			theframe.setContentPane(thePanel);
 			aboutLabel.setSize(300, 200);
 			aboutLabel.setLocation(10, 10);
 			aboutpanel.add(aboutLabel);
@@ -78,7 +77,7 @@ public class come implements ActionListener, ChangeListener{
 	}
 	
 	// Constructor: 
-	public come(){
+	public test(){
 		thePanel.setLayout(null);
 		thePanel.setPreferredSize(new Dimension(960, 540));
 
@@ -145,6 +144,6 @@ public class come implements ActionListener, ChangeListener{
 	
 	// Main Method
 	public static void main(String[] args){
-		new come();
+		new test();
 	}
 }

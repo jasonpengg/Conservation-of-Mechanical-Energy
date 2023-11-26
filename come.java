@@ -33,10 +33,14 @@ public class come implements ActionListener, ChangeListener{
 	JLabel vLabel = new JLabel("Enter velocity: ");
 	JLabel mLabel = new JLabel("Enter mass: ");
 	JLabel hLabel = new JLabel();
-	JLabel MaxHLabel = new JLabel();
+	JLabel maxHLabel = new JLabel();
 	JLabel aboutLabel = new JLabel("Sam and Jason were the programmers of this simulation. This was thanks to the ICS4U1 Computer Science class by Mr. Cadawas. ");
-	
 	Timer thetimer = new Timer(1000/45, this);
+	
+	//Global variables
+	int intVel;
+	int intHeight;
+	double dblMaxHeight; 
 	
 	// Methods
 	public void actionPerformed(ActionEvent evt){
@@ -63,18 +67,38 @@ public class come implements ActionListener, ChangeListener{
 		}
 		if(evt.getSource() == fireButton){
 			System.out.println("fire");
+			thePanel.intVel = -(this.intVel);
+			thePanel.dblFPS = 0;
+			thePanel.dblTime = 0;
+			thePanel.blnMove = true;
 		}
 		if(evt.getSource() == resetButton){
+			//Set everything to 0, time, vel, Y values, max height, visible, EVERYTHIGN 
 			System.out.println("reset");
+			thePanel.blnMove = false;
 		}
 		if(evt.getSource () == thetimer){
 			thePanel.repaint();
+			hLabel.setText("" + thePanel.dblHeight+ "m");
+			hLabel.setLocation(150, thePanel.intY-95);
+			//Needs fixing for Max height
+			
+			if(thePanel.dblHeight >= dblMaxHeight ){
+				dblMaxHeight = thePanel.dblHeight;
+				maxHLabel.setText ("" + dblMaxHeight+ "m (MaxHeight)");
+				maxHLabel.setLocation(150, thePanel.intYMax-95);
+				maxHLabel.setForeground(Color.BLUE);
+			}if(thePanel.blnMaxHeight == true){
+				maxHLabel.setVisible(true);
+			}else{
+				maxHLabel.setVisible(false);	
+			}
 		}
 	}
 	public void stateChanged(ChangeEvent evt){
 		System.out.println(sliderVel.getValue());
 		System.out.println(sliderMass.getValue());
-		
+		this.intVel = sliderVel.getValue();
 	}
 	
 	// Constructor: 
@@ -82,7 +106,7 @@ public class come implements ActionListener, ChangeListener{
 		thePanel.setLayout(null);
 		thePanel.setPreferredSize(new Dimension(960, 540));
 
-		
+
 		// Buttons constructor
 		fireButton.setSize(190, 40);
 		fireButton.setLocation(670, 350);
@@ -95,7 +119,8 @@ public class come implements ActionListener, ChangeListener{
 		thePanel.add(resetButton);
 		
 		// Slider (You need all this code for the slider to appear);
-		sliderVel.setBounds(200, 100, 200, 50);
+		sliderVel.setBackground(Color.WHITE);
+		sliderVel.setBounds(670, 180, 200, 50);
 		sliderVel.setLocation(670,100);
 		sliderVel.setMajorTickSpacing(5);
         sliderVel.setMinorTickSpacing(1);
@@ -103,8 +128,9 @@ public class come implements ActionListener, ChangeListener{
         sliderVel.setPaintLabels(true);
         theframe.setVisible(true);
 		thePanel.add(sliderVel);
-		sliderMass.setBounds(200, 100, 200, 50);
-		sliderMass.setLocation(670,180);
+		
+		sliderMass.setBackground(Color.WHITE);
+		sliderMass.setBounds(670, 180, 200, 50);
 		sliderMass.setMajorTickSpacing(10);
         sliderMass.setMinorTickSpacing(2);
         sliderMass.setPaintTicks(true);
@@ -120,6 +146,12 @@ public class come implements ActionListener, ChangeListener{
 		mLabel.setSize(300, 200);
 		mLabel.setLocation(670, 70);
 		thePanel.add(mLabel);
+		
+		hLabel.setSize(300, 200);
+		thePanel.add(hLabel);
+		
+		maxHLabel.setSize(300, 200);
+		thePanel.add(maxHLabel);
 		
 		// Frame constructor
 		theframe.setJMenuBar(theBar);

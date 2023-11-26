@@ -78,18 +78,21 @@ public class come implements ActionListener, ChangeListener{
 			thePanel.blnMove = false;
 		}
 		if(evt.getSource () == thetimer){
+			//This tracks the Height of the ball in (m)
 			thePanel.repaint();
 			hLabel.setText("" + thePanel.dblHeight+ "m");
 			hLabel.setLocation(150, thePanel.intY-95);
-			//Needs fixing for Max height
-			
+
+			//Checks if the Height of the ball is at max height of all the other shots
 			if(thePanel.dblHeight >= dblMaxHeight ){
 				dblMaxHeight = thePanel.dblHeight;
 				maxHLabel.setText ("" + dblMaxHeight+ "m (MaxHeight)");
 				maxHLabel.setLocation(150, thePanel.intYMax-95);
 				maxHLabel.setForeground(Color.BLUE);
+			//Checks if the Height of the ball is max height of the first launch
 			}if(thePanel.blnMaxHeight == true){
 				maxHLabel.setVisible(true);
+			//Intially sets the Balls invisible, also used if the reset button is clicked
 			}else{
 				maxHLabel.setVisible(false);	
 			}

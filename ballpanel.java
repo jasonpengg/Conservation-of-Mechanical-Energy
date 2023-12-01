@@ -33,16 +33,15 @@ public class ballpanel extends JPanel{
 		
 		//Boundaries of the ball (can be deleted) 
 		g.setColor(Color.RED);
-		g.fillRect(0,400,200, 5);
-		g.fillRect(0,50,200, 1);
+		g.fillRect(0,400,300, 3);
+		//g.fillRect(0,50,200, 1);
 		
 		//For movement of the ball and bar 
 		g.setColor(Color.RED);
 		g.fillOval(intX,intY, 20, 20);
-		g.fillRect(0,intYMax,960, 1);
+		g.fillRect(0,intYMax,300, 1);
 		g.drawImage(imgRuler, 0, 41, null);
 
-		//Use the calculation file, makes it neater
 		// Height in Metres (for label)
 		dblHeight = -Math.round((4.9*dblTime*dblTime + intVel*dblTime)*100.0)/100.0;
 		//System.out.println(dblHeight);
@@ -71,7 +70,7 @@ public class ballpanel extends JPanel{
 		
 		//The entire program stops if this is false, since everything is Time dependant
 		if(blnMove == true){
-			dblFPS = dblFPS + (1000.0/30.0);
+			dblFPS = dblFPS + (1000.0/48.0);
 			dblTime = dblFPS/1000.0;
 		}
 		

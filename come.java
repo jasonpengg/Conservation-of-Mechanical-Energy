@@ -34,8 +34,9 @@ public class come implements ActionListener, ChangeListener{
 	JLabel mLabel = new JLabel("Enter mass: ");
 	JLabel hLabel = new JLabel();
 	JLabel maxHLabel = new JLabel();
+	JLabel EkLabel = new JLabel("Intial Kinetic Energy: ");
 	JLabel aboutLabel = new JLabel("Sam and Jason were the programmers of this simulation. This was thanks to the ICS4U1 Computer Science class by Mr. Cadawas. ");
-	Timer thetimer = new Timer(1000/45, this);
+	Timer thetimer = new Timer(1000/48, this);
 	
 	//Global variables
 	int intVel;
@@ -75,6 +76,15 @@ public class come implements ActionListener, ChangeListener{
 		if(evt.getSource() == resetButton){
 			//Set everything to 0, time, vel, Y values, max height, visible, EVERYTHIGN 
 			System.out.println("reset");
+			thePanel.dblTime = 0;
+			thePanel.dblFPS = 0;
+			thePanel.intVel = 0;
+			dblMaxHeight = 0;
+			thePanel.intYMax = 401;
+			thePanel.blnMaxHeight = false;
+			thePanel.dblMaxHeight = 0;
+			maxHLabel.setVisible(false);
+			maxHLabel.setLocation(150, thePanel.intYMax-95);
 			thePanel.blnMove = false;
 		}
 		if(evt.getSource () == thetimer){
@@ -99,9 +109,12 @@ public class come implements ActionListener, ChangeListener{
 		}
 	}
 	public void stateChanged(ChangeEvent evt){
-		System.out.println(sliderVel.getValue());
-		System.out.println(sliderMass.getValue());
+		//System.out.println(sliderVel.getValue());
+		//System.out.println(sliderMass.getValue());
 		this.intVel = sliderVel.getValue();
+		EkLabel.setText ("Intial Kinetic Energy: "+(0.5 * sliderMass.getValue() * intVel*intVel) +"J");
+		vLabel.setText("Enter velocity: " +intVel);
+		mLabel.setText("Enter mass: " +sliderMass.getValue());
 	}
 	
 	// Constructor: 
@@ -155,6 +168,10 @@ public class come implements ActionListener, ChangeListener{
 		
 		maxHLabel.setSize(300, 200);
 		thePanel.add(maxHLabel);
+		
+		EkLabel.setSize(200, 100);
+		EkLabel.setLocation(670,200 );
+		thePanel.add(EkLabel);
 		
 		// Frame constructor
 		theframe.setJMenuBar(theBar);

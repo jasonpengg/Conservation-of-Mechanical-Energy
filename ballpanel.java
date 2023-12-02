@@ -70,8 +70,9 @@ public class ballpanel extends JPanel{
 		
 		//The entire program stops if this is false, since everything is Time dependant
 		if(blnMove == true){
-			dblFPS = dblFPS + (1000.0/48.0);
+			dblFPS = dblFPS + (1000.0/30.0);
 			dblTime = dblFPS/1000.0;
+			//System.out.println(dblTime);
 		}
 		
     }

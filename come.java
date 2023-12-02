@@ -19,15 +19,21 @@ public class come implements ActionListener, ChangeListener{
 	JFrame theframe = new JFrame("Conservation of Mechanical Energy");
 	ballpanel thePanel = new ballpanel();
 	JPanel aboutpanel = new JPanel();
+	JPanel testPanel = new JPanel();
+	JPanel scorePanel = new JPanel();
+	
 	// buttons
 	JButton fireButton = new JButton("Fire");
 	JButton resetButton = new JButton("Reset");
 	JButton mainMenu = new JButton("Main");
 	JMenuBar theBar = new JMenuBar();
-	JButton aboutItem = new JButton("About");
-	JButton helpItem = new JButton("Help");
+	JButton aboutMenu = new JButton("About");
+	JButton helpMenu = new JButton("Help");
+	JButton quizMenu = new JButton ("Quiz");
+	JButton scoreMenu = new JButton ("Score");
 	JSlider sliderVel = new JSlider(JSlider.HORIZONTAL, 0, 25, 12);
 	JSlider sliderMass = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
+	JSlider sliderHeight = new JSlider(JSlider.HORIZONTAL, 0, 35, 25);
 	
 	//labels
 	JLabel vLabel = new JLabel("Enter velocity: ");
@@ -37,6 +43,7 @@ public class come implements ActionListener, ChangeListener{
 	JLabel EkLabel = new JLabel("Intial Kinetic Energy: ");
 	JLabel aboutLabel = new JLabel("Sam and Jason were the programmers of this simulation. This was thanks to the ICS4U1 Computer Science class by Mr. Cadawas. ");
 	Timer thetimer = new Timer(1000/48, this);
+	JLabel QLabel = new JLabel();
 	
 	//Global variables
 	int intVel;
@@ -45,18 +52,15 @@ public class come implements ActionListener, ChangeListener{
 	
 	// Methods
 	public void actionPerformed(ActionEvent evt){
-		if(evt.getSource() == aboutItem){
+		if(evt.getSource() == aboutMenu){
 			System.out.println("about");
 			//Replace frame with new panel. 
 			theframe.setContentPane(aboutpanel);
-			aboutLabel.setSize(300, 200);
-			aboutLabel.setLocation(10, 10);
-			aboutpanel.add(aboutLabel);
+			theframe.pack();
 			aboutpanel.repaint();
 			theframe.repaint();
-			theframe.setVisible(true);
 		}
-		if(evt.getSource() == helpItem){
+		if(evt.getSource() == helpMenu){
 			System.out.println("help");
 		}
 		if(evt.getSource() == mainMenu){
@@ -86,6 +90,8 @@ public class come implements ActionListener, ChangeListener{
 			maxHLabel.setVisible(false);
 			maxHLabel.setLocation(150, thePanel.intYMax-95);
 			thePanel.blnMove = false;
+			sliderVel.setValue(12);
+			sliderMass.setValue(25);
 		}
 		if(evt.getSource () == thetimer){
 			//This tracks the Height of the ball in (m)
@@ -106,6 +112,9 @@ public class come implements ActionListener, ChangeListener{
 			}else{
 				maxHLabel.setVisible(false);	
 			}
+		}
+		if(evt.getSource() == quizMenu){
+			theframe.setContentPane(aboutpanel);
 		}
 	}
 	public void stateChanged(ChangeEvent evt){
@@ -176,15 +185,27 @@ public class come implements ActionListener, ChangeListener{
 		// Frame constructor
 		theframe.setJMenuBar(theBar);
 		theBar.add(mainMenu);
-		theBar.add(aboutItem);
-		theBar.add(helpItem);
+		theBar.add(aboutMenu);
+		theBar.add(helpMenu);
+		theBar.add(scoreMenu);
+		theBar.add(quizMenu);
 		
 		// Adding Functions to Components
 		sliderVel.addChangeListener(this);
 		sliderMass.addChangeListener(this);
-		aboutItem.addActionListener(this);
-		helpItem.addActionListener(this);
+		aboutMenu.addActionListener(this);
+		helpMenu.addActionListener(this);
 		mainMenu.addActionListener(this);
+		
+		//About Panel
+		aboutpanel.setLayout(null);
+		aboutpanel.setPreferredSize(new Dimension(960, 540));
+		aboutLabel.setSize(1000,50);
+		aboutLabel.setLocation(10, 10);
+		aboutpanel.add(aboutLabel);
+		
+		//Quiz Panel 
+		
 		
 		// Frame
 		theframe.setContentPane(thePanel);

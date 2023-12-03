@@ -57,6 +57,7 @@ public class come implements ActionListener, ChangeListener{
 	
 	Timer thetimer = new Timer(1000/48, this);
 	JTextField nameText = new JTextField();
+	JTextArea scoresText = new JTextArea();
 	
 	//Global variables
 	int intVel;
@@ -86,6 +87,31 @@ public class come implements ActionListener, ChangeListener{
 			theframe.repaint();
 			theframe.setVisible(true);
 		}
+		if(evt.getSource() == scoreMenu){
+			System.out.println("Score");
+			theframe.setContentPane(scorePanel);
+			theframe.pack();
+			scorePanel.repaint();
+			theframe.repaint();
+			scorePanel.setVisible(true);
+			scoresText.setEditable(false);
+			try{
+				BufferedReader infile = new BufferedReader(new FileReader("highScores.txt"));
+				String strLine = "";
+				strLine = infile.readLine();
+				while(strLine != null){
+					scoresText.append(strLine+"\n");
+					strLine = infile.readLine();
+				}
+				infile.close();
+			
+			}catch(FileNotFoundException e){
+				System.out.println("File not found");
+			}catch (IOException e){
+
+			}		
+			
+		}
 		if(evt.getSource() == quizMenu){
 			theframe.setContentPane(testPanel);
 			theframe.pack();
@@ -93,6 +119,11 @@ public class come implements ActionListener, ChangeListener{
 			theframe.repaint();
 			questionButton.doClick();
 			enterName.setVisible(false);
+			submitButton.setEnabled(true);
+			questionButton.setEnabled(true);
+			endButton.setEnabled(true);
+			resultLabel.setText("");
+			nameText.setEditable(false);
 		}
 		if(evt.getSource()== submitButton){
 			if(calculations.Height(intQVelocity) == intInputHeight){
@@ -111,7 +142,7 @@ public class come implements ActionListener, ChangeListener{
 		if(evt.getSource()== questionButton){
 			System.out.println("Question");
 			intQVelocity = (int) (Math.random() * 25) + 1;
-			System.out.println(intQVelocity);
+			//System.out.println(intQVelocity);
 			QLabel.setText("Given the height to be: "+ intQVelocity +"m/s");
 			QLabel2.setText("m/s calculate max height, round to nearest whole number");
 		}
@@ -122,6 +153,16 @@ public class come implements ActionListener, ChangeListener{
 			questionButton.setEnabled(false);
 			endButton.setEnabled(false);
 			enterName.setVisible(true);
+			nameText.setEditable(true);
+		}
+		if(evt.getSource()== enterName){
+			enterName.setEnabled(false);
+			String strName = nameText.getText();
+			calculations.highScoreFile(strName, intScore);
+			intScore = 0;
+			nameText.setText("");
+			scoreLabel.setText("");
+			resultLabel.setText("");
 		}
 //---------------------------------------------------------------thePanel---------------------------------------------------------------------
 		if(evt.getSource() == fireButton){
@@ -250,8 +291,9 @@ public class come implements ActionListener, ChangeListener{
 		//Quiz Panel 
 		testPanel.setLayout(null);
 		testPanel.setPreferredSize(new Dimension(960, 540));
-		//Slider
 		testPanel.setBackground(Color.WHITE);
+		//Slider
+		
 		sliderQuizHeight.setBackground(Color.WHITE);
 		sliderQuizHeight.setBounds(670, 180, 200, 50);
 		sliderQuizHeight.setLocation(670,100);
@@ -306,7 +348,14 @@ public class come implements ActionListener, ChangeListener{
 		enterName.setLocation(670, 400);
 		enterName.addActionListener(this);
 		testPanel.add(enterName);
-		
+		//-------------------------------------------------------------------SCORE PANEL-------------------------------------------------------------------------------//
+		scorePanel.setLayout(null);
+		scorePanel.setPreferredSize(new Dimension(960, 540));
+		scorePanel.setBackground(Color.WHITE);
+
+		scoresText.setSize(900, 500);
+		scoresText.setLocation(30, 20);
+		scorePanel.add(scoresText);
 		//-------------------------------------------------------------------GENERAL FRAME-------------------------------------------------------------------------------//
 		// Adding Functions to Components
 		sliderVel.addChangeListener(this);
@@ -315,6 +364,7 @@ public class come implements ActionListener, ChangeListener{
 		helpMenu.addActionListener(this);
 		mainMenu.addActionListener(this);
 		quizMenu.addActionListener(this);
+		scoreMenu.addActionListener(this);
 		sliderQuizHeight.addChangeListener(this);
 		
 		// Frame constructor
@@ -322,8 +372,8 @@ public class come implements ActionListener, ChangeListener{
 		theBar.add(mainMenu);
 		theBar.add(aboutMenu);
 		theBar.add(helpMenu);
-		theBar.add(scoreMenu);
 		theBar.add(quizMenu);
+		theBar.add(scoreMenu);
 		
 		// Frame
 		theframe.setContentPane(thePanel);

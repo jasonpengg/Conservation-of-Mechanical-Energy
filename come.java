@@ -7,19 +7,13 @@ import java.awt.event.*;
 import javax.swing.event.*;
 import java.io.*;
 
-// Things left to do: 
-// Make buttons 
-// Make ball fall up and down with animation 
-// the JFrame property setter can be replaced when we have the animation panel working. 
-
 public class come implements ActionListener, ChangeListener{
-	// NOTE: When naming variables, use lower camel capitalization 
-	// E.g firstName, lastName
 	// Properties
-	JFrame theframe = new JFrame("Conservation of Mechanical Energy");
+	JFrame theFrame = new JFrame("Conservation of Mechanical Energy");
 	ballpanel thePanel = new ballpanel();
-	JPanel aboutpanel = new JPanel();
-	JPanel testPanel = new JPanel();
+	aboutpanel abtPanel = new aboutpanel();
+	helppanel hlpPanel = new helppanel();
+	quizpanel testPanel = new quizpanel();
 	JPanel scorePanel = new JPanel();
 	
 	// buttons
@@ -72,27 +66,32 @@ public class come implements ActionListener, ChangeListener{
 		if(evt.getSource() == aboutMenu){
 			System.out.println("about");
 			//Replace frame with new panel. 
-			theframe.setContentPane(aboutpanel);
-			theframe.pack();
-			aboutpanel.repaint();
-			theframe.repaint();
+			theFrame.setContentPane(abtPanel);
+			theFrame.pack();
+			abtPanel.repaint();
+			theFrame.repaint();
 		}
 		if(evt.getSource() == helpMenu){
 			System.out.println("help");
+			theFrame.setContentPane(hlpPanel);
+			theFrame.pack();
+			hlpPanel.repaint();
+			theFrame.repaint();
 		}
 		if(evt.getSource() == mainMenu){
 			System.out.println("menu");
-			theframe.setContentPane(thePanel);
+			theFrame.setContentPane(thePanel);
 			thePanel.repaint();
-			theframe.repaint();
-			theframe.setVisible(true);
+			theFrame.repaint();
+			theFrame.setVisible(true);
 		}
 		if(evt.getSource() == scoreMenu){
 			System.out.println("Score");
-			theframe.setContentPane(scorePanel);
-			theframe.pack();
+			theFrame.setContentPane(scorePanel);
+			theFrame.pack();
 			scorePanel.repaint();
-			theframe.repaint();
+			theFrame.repaint();
+			scoresText.setText("");
 			scorePanel.setVisible(true);
 			scoresText.setEditable(false);
 			try{
@@ -113,10 +112,10 @@ public class come implements ActionListener, ChangeListener{
 			
 		}
 		if(evt.getSource() == quizMenu){
-			theframe.setContentPane(testPanel);
-			theframe.pack();
+			theFrame.setContentPane(testPanel);
+			theFrame.pack();
 			testPanel.repaint();
-			theframe.repaint();
+			theFrame.repaint();
 			questionButton.doClick();
 			enterName.setVisible(false);
 			submitButton.setEnabled(true);
@@ -135,16 +134,15 @@ public class come implements ActionListener, ChangeListener{
 				scoreLabel.setText("the score is: "+intScore);
 			}else{
 				resultLabel.setForeground(Color.RED);
-				resultLabel.setText("incorrect, Try Again");
+				resultLabel.setText("Incorrect, Try Again");
 			}
 
 		}
 		if(evt.getSource()== questionButton){
 			System.out.println("Question");
 			intQVelocity = (int) (Math.random() * 25) + 1;
-			//System.out.println(intQVelocity);
-			QLabel.setText("Given the height to be: "+ intQVelocity +"m/s");
-			QLabel2.setText("m/s calculate max height, round to nearest whole number");
+			QLabel.setText("Given the velocity to be: "+ intQVelocity +"m/s,");
+			QLabel2.setText("Calculate max height. Round to nearest whole number");
 		}
 		if(evt.getSource()== endButton){
 			System.out.println("End");
@@ -173,7 +171,7 @@ public class come implements ActionListener, ChangeListener{
 			thePanel.blnMove = true;
 		}
 		if(evt.getSource() == resetButton){
-			//Set everything to 0, time, vel, Y values, max height, visible, EVERYTHIGN 
+			// Set all values to 0
 			System.out.println("reset");
 			thePanel.dblTime = 0;
 			thePanel.dblFPS = 0;
@@ -211,11 +209,8 @@ public class come implements ActionListener, ChangeListener{
 
 	}
 	public void stateChanged(ChangeEvent evt){
-		//System.out.println(sliderVel.getValue());
-		//System.out.println(sliderMass.getValue());
 		this.intVel = sliderVel.getValue();
 		this.intInputHeight = sliderQuizHeight.getValue();
-		//System.out.println(intInputHeight);
 		EkLabel.setText ("Intial Kinetic Energy: "+(0.5 * sliderMass.getValue() * intVel*intVel) +"J");
 		vLabel.setText("Enter velocity: " +intVel);
 		mLabel.setText("Enter mass: " +sliderMass.getValue());
@@ -247,7 +242,7 @@ public class come implements ActionListener, ChangeListener{
         sliderVel.setMinorTickSpacing(1);
         sliderVel.setPaintTicks(true);
         sliderVel.setPaintLabels(true);
-        theframe.setVisible(true);
+        theFrame.setVisible(true);
 		thePanel.add(sliderVel);
 		
 		sliderMass.setBackground(Color.WHITE);
@@ -256,7 +251,7 @@ public class come implements ActionListener, ChangeListener{
         sliderMass.setMinorTickSpacing(2);
         sliderMass.setPaintTicks(true);
         sliderMass.setPaintLabels(true);
-        theframe.setVisible(true);
+        theFrame.setVisible(true);
 		thePanel.add(sliderMass);
 		
 		// Labels Constructor
@@ -281,17 +276,20 @@ public class come implements ActionListener, ChangeListener{
 
 		//-------------------------------------------------------------------ABOUT PANEL-------------------------------------------------------------------------------//
 		//About Panel
-		aboutpanel.setLayout(null);
-		aboutpanel.setPreferredSize(new Dimension(960, 540));
-		aboutLabel.setSize(1000,50);
-		aboutLabel.setLocation(10, 10);
-		aboutpanel.add(aboutLabel);
+		abtPanel.setLayout(null);
+		abtPanel.setPreferredSize(new Dimension(960, 540));
 		
+		//-------------------------------------------------------------------HELP PANEL-------------------------------------------------------------------------------//
+		//Help Panel
+		hlpPanel.setLayout(null);
+		hlpPanel.setPreferredSize(new Dimension(960, 540));
+
 		//-------------------------------------------------------------------QUIZ PANEL-------------------------------------------------------------------------------//
 		//Quiz Panel 
 		testPanel.setLayout(null);
 		testPanel.setPreferredSize(new Dimension(960, 540));
 		testPanel.setBackground(Color.WHITE);
+
 		//Slider
 		
 		sliderQuizHeight.setBackground(Color.WHITE);
@@ -301,7 +299,7 @@ public class come implements ActionListener, ChangeListener{
         sliderQuizHeight.setMinorTickSpacing(1);
         sliderQuizHeight.setPaintTicks(true);
         sliderQuizHeight.setPaintLabels(true);
-        theframe.setVisible(true);
+        theFrame.setVisible(true);
 		testPanel.add(sliderQuizHeight);
 
 		//Label
@@ -368,7 +366,7 @@ public class come implements ActionListener, ChangeListener{
 		sliderQuizHeight.addChangeListener(this);
 		
 		// Frame constructor
-		theframe.setJMenuBar(theBar);
+		theFrame.setJMenuBar(theBar);
 		theBar.add(mainMenu);
 		theBar.add(aboutMenu);
 		theBar.add(helpMenu);
@@ -376,11 +374,11 @@ public class come implements ActionListener, ChangeListener{
 		theBar.add(scoreMenu);
 		
 		// Frame
-		theframe.setContentPane(thePanel);
-		theframe.pack();
-		theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		theframe.setResizable(false);
-		theframe.setVisible(true);
+		theFrame.setContentPane(thePanel);
+		theFrame.pack();
+		theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		theFrame.setResizable(false);
+		theFrame.setVisible(true);
 		thetimer.start();
 	}
 

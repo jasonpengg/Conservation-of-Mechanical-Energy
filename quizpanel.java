@@ -1,14 +1,25 @@
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.event.*;
+import java.io.*;
+import javax.imageio.*;
+import java.awt.image.*;
 
 public class quizpanel extends JPanel{
-	// needs to import quiz.txt files into array 
-	// needs to randomize the numbers 
-	// answers and questions should be in abababa... format in txt file 
-	// there should be textboxes that allow answers 
-	// keep the question on until the answer is correct 
+	BufferedImage imgQuiz = null;
+	
+	public void paintComponent(Graphics g){
+		g.setColor(Color.WHITE);
+		g.fillRect(0,0,960, 540);
+		g.drawImage(imgQuiz, 34,190,null);
+	}
+	// Constructor
+	public quizpanel(){
+		try{
+			imgQuiz = ImageIO.read(new File("quizformula.png"));
+		}catch(IOException e){
+			System.out.println("cannot load image");
+		}
+	}
 
 
 }

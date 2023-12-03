@@ -30,10 +30,16 @@ public class come implements ActionListener, ChangeListener{
 	JButton aboutMenu = new JButton("About");
 	JButton helpMenu = new JButton("Help");
 	JButton quizMenu = new JButton ("Quiz");
+	JButton submitButton = new JButton ("Submit");
+	JButton questionButton = new JButton ("Give Question");
+	JButton endButton = new JButton ("End Quiz");
 	JButton scoreMenu = new JButton ("Score");
+	JButton enterName = new JButton ("Enter Name");
+	//Sliders
 	JSlider sliderVel = new JSlider(JSlider.HORIZONTAL, 0, 25, 12);
 	JSlider sliderMass = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
 	JSlider sliderHeight = new JSlider(JSlider.HORIZONTAL, 0, 35, 25);
+	JSlider sliderQuizHeight = new JSlider(JSlider.HORIZONTAL, 0, 35, 25);
 	
 	//labels
 	JLabel vLabel = new JLabel("Enter velocity: ");
@@ -42,13 +48,23 @@ public class come implements ActionListener, ChangeListener{
 	JLabel maxHLabel = new JLabel();
 	JLabel EkLabel = new JLabel("Intial Kinetic Energy: ");
 	JLabel aboutLabel = new JLabel("Sam and Jason were the programmers of this simulation. This was thanks to the ICS4U1 Computer Science class by Mr. Cadawas. ");
-	Timer thetimer = new Timer(1000/48, this);
+	//Create a timer for answers (optional)
 	JLabel QLabel = new JLabel();
+	JLabel QLabel2 = new JLabel();
+	JLabel QHLabel = new JLabel("Enter Height: ");
+	JLabel resultLabel = new JLabel("");
+	JLabel scoreLabel = new JLabel();
+	
+	Timer thetimer = new Timer(1000/48, this);
+	JTextField nameText = new JTextField();
 	
 	//Global variables
 	int intVel;
 	int intHeight;
 	double dblMaxHeight; 
+	int intInputHeight;
+	int intQVelocity;
+	int intScore;
 	
 	// Methods
 	public void actionPerformed(ActionEvent evt){
@@ -70,6 +86,44 @@ public class come implements ActionListener, ChangeListener{
 			theframe.repaint();
 			theframe.setVisible(true);
 		}
+		if(evt.getSource() == quizMenu){
+			theframe.setContentPane(testPanel);
+			theframe.pack();
+			testPanel.repaint();
+			theframe.repaint();
+			questionButton.doClick();
+			enterName.setVisible(false);
+		}
+		if(evt.getSource()== submitButton){
+			if(calculations.Height(intQVelocity) == intInputHeight){
+				System.out.println("correct");
+				questionButton.doClick();
+				intScore++;
+				resultLabel.setForeground(Color.GREEN);
+				resultLabel.setText("Correct!");
+				scoreLabel.setText("the score is: "+intScore);
+			}else{
+				resultLabel.setForeground(Color.RED);
+				resultLabel.setText("incorrect, Try Again");
+			}
+
+		}
+		if(evt.getSource()== questionButton){
+			System.out.println("Question");
+			intQVelocity = (int) (Math.random() * 25) + 1;
+			System.out.println(intQVelocity);
+			QLabel.setText("Given the height to be: "+ intQVelocity +"m/s");
+			QLabel2.setText("m/s calculate max height, round to nearest whole number");
+		}
+		if(evt.getSource()== endButton){
+			System.out.println("End");
+			System.out.println(intScore);
+			submitButton.setEnabled(false);
+			questionButton.setEnabled(false);
+			endButton.setEnabled(false);
+			enterName.setVisible(true);
+		}
+//---------------------------------------------------------------thePanel---------------------------------------------------------------------
 		if(evt.getSource() == fireButton){
 			System.out.println("fire");
 			thePanel.intVel = -(this.intVel);
@@ -113,25 +167,26 @@ public class come implements ActionListener, ChangeListener{
 				maxHLabel.setVisible(false);	
 			}
 		}
-		if(evt.getSource() == quizMenu){
-			theframe.setContentPane(aboutpanel);
-		}
+
 	}
 	public void stateChanged(ChangeEvent evt){
 		//System.out.println(sliderVel.getValue());
 		//System.out.println(sliderMass.getValue());
 		this.intVel = sliderVel.getValue();
+		this.intInputHeight = sliderQuizHeight.getValue();
+		//System.out.println(intInputHeight);
 		EkLabel.setText ("Intial Kinetic Energy: "+(0.5 * sliderMass.getValue() * intVel*intVel) +"J");
 		vLabel.setText("Enter velocity: " +intVel);
 		mLabel.setText("Enter mass: " +sliderMass.getValue());
+		QHLabel.setText("Enter Height: " +intInputHeight +"m");
 	}
 	
 	// Constructor: 
 	public come(){
+		//-------------------------------------------------------------------MAIN MENU-------------------------------------------------------------------------------//
 		thePanel.setLayout(null);
 		thePanel.setPreferredSize(new Dimension(960, 540));
-
-
+		
 		// Buttons constructor
 		fireButton.setSize(190, 40);
 		fireButton.setLocation(670, 350);
@@ -182,21 +237,8 @@ public class come implements ActionListener, ChangeListener{
 		EkLabel.setLocation(670,200 );
 		thePanel.add(EkLabel);
 		
-		// Frame constructor
-		theframe.setJMenuBar(theBar);
-		theBar.add(mainMenu);
-		theBar.add(aboutMenu);
-		theBar.add(helpMenu);
-		theBar.add(scoreMenu);
-		theBar.add(quizMenu);
-		
-		// Adding Functions to Components
-		sliderVel.addChangeListener(this);
-		sliderMass.addChangeListener(this);
-		aboutMenu.addActionListener(this);
-		helpMenu.addActionListener(this);
-		mainMenu.addActionListener(this);
-		
+
+		//-------------------------------------------------------------------ABOUT PANEL-------------------------------------------------------------------------------//
 		//About Panel
 		aboutpanel.setLayout(null);
 		aboutpanel.setPreferredSize(new Dimension(960, 540));
@@ -204,8 +246,84 @@ public class come implements ActionListener, ChangeListener{
 		aboutLabel.setLocation(10, 10);
 		aboutpanel.add(aboutLabel);
 		
+		//-------------------------------------------------------------------QUIZ PANEL-------------------------------------------------------------------------------//
 		//Quiz Panel 
+		testPanel.setLayout(null);
+		testPanel.setPreferredSize(new Dimension(960, 540));
+		//Slider
+		testPanel.setBackground(Color.WHITE);
+		sliderQuizHeight.setBackground(Color.WHITE);
+		sliderQuizHeight.setBounds(670, 180, 200, 50);
+		sliderQuizHeight.setLocation(670,100);
+		sliderQuizHeight.setMajorTickSpacing(5);
+        sliderQuizHeight.setMinorTickSpacing(1);
+        sliderQuizHeight.setPaintTicks(true);
+        sliderQuizHeight.setPaintLabels(true);
+        theframe.setVisible(true);
+		testPanel.add(sliderQuizHeight);
+
+		//Label
+		QLabel.setSize(400, 120);
+		QLabel.setLocation(50, 40);
+		testPanel.add(QLabel);
 		
+		QLabel2.setSize(400, 120);
+		QLabel2.setLocation(50, 70);
+		testPanel.add(QLabel2);
+		
+		QHLabel.setSize(100, 100);
+		QHLabel.setLocation(675, 40);
+		testPanel.add(QHLabel);
+		
+		resultLabel.setSize(200, 100);
+		resultLabel.setLocation(50,110);
+		testPanel.add(resultLabel);
+		
+		scoreLabel.setSize(100, 100);
+		scoreLabel.setLocation(50,150);
+		testPanel.add(scoreLabel);
+		// Button 
+		submitButton.setSize(190, 40);
+		submitButton.setLocation(670, 200);
+		submitButton.addActionListener(this);
+		testPanel.add(submitButton);
+		
+		questionButton.setSize(190, 40);
+		questionButton.setLocation(670, 250);
+		questionButton.addActionListener(this);
+		testPanel.add(questionButton);
+		
+		endButton.setSize(190, 40);
+		endButton.setLocation(670, 300);
+		endButton.addActionListener(this);
+		testPanel.add(endButton);
+		
+		nameText.setSize(190,40);
+		nameText.setLocation(670, 350);		
+		testPanel.add(nameText);
+		
+		enterName.setSize(190, 40);
+		enterName.setLocation(670, 400);
+		enterName.addActionListener(this);
+		testPanel.add(enterName);
+		
+		//-------------------------------------------------------------------GENERAL FRAME-------------------------------------------------------------------------------//
+		// Adding Functions to Components
+		sliderVel.addChangeListener(this);
+		sliderMass.addChangeListener(this);
+		aboutMenu.addActionListener(this);
+		helpMenu.addActionListener(this);
+		mainMenu.addActionListener(this);
+		quizMenu.addActionListener(this);
+		sliderQuizHeight.addChangeListener(this);
+		
+		// Frame constructor
+		theframe.setJMenuBar(theBar);
+		theBar.add(mainMenu);
+		theBar.add(aboutMenu);
+		theBar.add(helpMenu);
+		theBar.add(scoreMenu);
+		theBar.add(quizMenu);
 		
 		// Frame
 		theframe.setContentPane(thePanel);
@@ -215,9 +333,10 @@ public class come implements ActionListener, ChangeListener{
 		theframe.setVisible(true);
 		thetimer.start();
 	}
-	
+
 	// Main Method
 	public static void main(String[] args){
 		new come();
+
 	}
 }

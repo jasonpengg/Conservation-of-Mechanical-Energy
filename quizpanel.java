@@ -10,7 +10,7 @@ public class quizpanel extends JPanel{
 	public void paintComponent(Graphics g){
 		g.setColor(Color.WHITE);
 		g.fillRect(0,0,960, 540);
-		g.drawImage(imgQuiz, 34,190,null);
+		g.drawImage(imgQuiz, 34,300,null);
 	}
 	// Constructor
 	public quizpanel(){

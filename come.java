@@ -291,7 +291,6 @@ public class come implements ActionListener, ChangeListener{
 		testPanel.setBackground(Color.WHITE);
 
 		//Slider
-		
 		sliderQuizHeight.setBackground(Color.WHITE);
 		sliderQuizHeight.setBounds(670, 180, 200, 50);
 		sliderQuizHeight.setLocation(670,100);
@@ -315,13 +314,14 @@ public class come implements ActionListener, ChangeListener{
 		QHLabel.setLocation(675, 40);
 		testPanel.add(QHLabel);
 		
-		resultLabel.setSize(200, 100);
-		resultLabel.setLocation(50,110);
+		resultLabel.setSize(400, 120);
+		resultLabel.setLocation(50,100);
 		testPanel.add(resultLabel);
 		
-		scoreLabel.setSize(100, 100);
-		scoreLabel.setLocation(50,150);
+		scoreLabel.setSize(400, 120);
+		scoreLabel.setLocation(50,130);
 		testPanel.add(scoreLabel);
+		
 		// Button 
 		submitButton.setSize(190, 40);
 		submitButton.setLocation(670, 200);

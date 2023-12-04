@@ -6,26 +6,26 @@ import javax.imageio.*;
 
 
 public class ballpanel extends JPanel{
-    // Properties 
-    int intX = 100;
-    int intY = 400;
-    int intYMax = 401;
-    double dblY = 0;
+	// Properties 
+	int intX = 100;
+	int intY = 400;
+	int intYMax = 401;
+	double dblY = 0;
 
-    int intVel = 0;
-    double dblTime = 0;
-    double dblFPS = 0;
-    double dblPosition;
-    BufferedImage imgRuler = null;
-    boolean blnMove = false;
-    double dblHeight = 0; 
-    
-    boolean blnMaxHeight = false;
-    double dblMaxHeight = 0;
-    
-    // Methods
-    // override how JComponent is painted 
-    public void paintComponent(Graphics g){
+	int intVel = 0;
+	double dblTime = 0;
+	double dblFPS = 0;
+	double dblPosition;
+	BufferedImage imgRuler = null;
+	boolean blnMove = false;
+	double dblHeight = 0; 
+	
+	boolean blnMaxHeight = false;
+	double dblMaxHeight = 0;
+	
+	// Methods
+	// override how JComponent is painted 
+	public void paintComponent(Graphics g){
 		//System.out.println(blnMove);
 		//System.out.println(dblTime);
 		g.setColor(Color.WHITE);
@@ -75,16 +75,26 @@ public class ballpanel extends JPanel{
 			//System.out.println(dblTime);
 		}
 		
-    }
+	}
 
 
-    //Constructor
-    public ballpanel (){
-		try{
-            imgRuler = ImageIO.read(new File("35m.png"));
-        }catch (IOException e){
-            System.out.println("cannot load image");
-        }
-       
-    }
+	//Constructor
+	public ballpanel (){
+		InputStream imageclass = null;
+		imageclass = this.getClass().getResourceAsStream("35m.png");
+		if(imageclass != null){
+			try{
+				imgRuler = ImageIO.read(imageclass);
+			}catch(IOException e){
+				System.out.println("cannot load jar image");
+			}
+		}
+		if(imgRuler == null){
+			try{
+				imgRuler = ImageIO.read(new File("35m.png"));
+			}catch (IOException e){
+				System.out.println("cannot load image");
+			}
+		}
+	}
 }

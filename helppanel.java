@@ -12,10 +12,21 @@ public class helppanel extends JPanel{
 	}
 	// Constructor
 	public helppanel(){
-		try{
-			imgHelp = ImageIO.read(new File("helppanelpic.png"));
-		}catch(IOException e){
-			System.out.println("cannot load image");
+		InputStream imageclass = null;
+		imageclass = this.getClass().getResourceAsStream("helppanelpic.png");
+		if(imageclass != null){
+			try{
+				imgHelp = ImageIO.read(imageclass);
+			}catch(IOException e){
+				System.out.println("cannot load jar image");
+			}
+		}
+		if(imgHelp == null){
+			try{
+				imgHelp = ImageIO.read(new File("helppanelpic.png"));
+			}catch(IOException e){
+				System.out.println("cannot load image");
+			}
 		}
 	}
 }

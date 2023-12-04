@@ -16,7 +16,7 @@ public class come implements ActionListener, ChangeListener{
 	quizpanel testPanel = new quizpanel();
 	JPanel scorePanel = new JPanel();
 	
-	// buttons
+	// Buttons
 	JButton fireButton = new JButton("Fire");
 	JButton resetButton = new JButton("Reset");
 	JButton mainMenu = new JButton("Main");
@@ -136,7 +136,6 @@ public class come implements ActionListener, ChangeListener{
 				resultLabel.setForeground(Color.RED);
 				resultLabel.setText("Incorrect, Try Again");
 			}
-
 		}
 		if(evt.getSource()== questionButton){
 			System.out.println("Question");
@@ -239,19 +238,19 @@ public class come implements ActionListener, ChangeListener{
 		sliderVel.setBounds(670, 180, 200, 50);
 		sliderVel.setLocation(670,100);
 		sliderVel.setMajorTickSpacing(5);
-        sliderVel.setMinorTickSpacing(1);
-        sliderVel.setPaintTicks(true);
-        sliderVel.setPaintLabels(true);
-        theFrame.setVisible(true);
+		sliderVel.setMinorTickSpacing(1);
+		sliderVel.setPaintTicks(true);
+		sliderVel.setPaintLabels(true);
+		theFrame.setVisible(true);
 		thePanel.add(sliderVel);
 		
 		sliderMass.setBackground(Color.WHITE);
 		sliderMass.setBounds(670, 180, 200, 50);
 		sliderMass.setMajorTickSpacing(10);
-        sliderMass.setMinorTickSpacing(2);
-        sliderMass.setPaintTicks(true);
-        sliderMass.setPaintLabels(true);
-        theFrame.setVisible(true);
+		sliderMass.setMinorTickSpacing(2);
+		sliderMass.setPaintTicks(true);
+		sliderMass.setPaintLabels(true);
+		theFrame.setVisible(true);
 		thePanel.add(sliderMass);
 		
 		// Labels Constructor
@@ -295,10 +294,10 @@ public class come implements ActionListener, ChangeListener{
 		sliderQuizHeight.setBounds(670, 180, 200, 50);
 		sliderQuizHeight.setLocation(670,100);
 		sliderQuizHeight.setMajorTickSpacing(5);
-        sliderQuizHeight.setMinorTickSpacing(1);
-        sliderQuizHeight.setPaintTicks(true);
-        sliderQuizHeight.setPaintLabels(true);
-        theFrame.setVisible(true);
+		sliderQuizHeight.setMinorTickSpacing(1);
+		sliderQuizHeight.setPaintTicks(true);
+		sliderQuizHeight.setPaintLabels(true);
+		theFrame.setVisible(true);
 		testPanel.add(sliderQuizHeight);
 
 		//Label
@@ -381,7 +380,7 @@ public class come implements ActionListener, ChangeListener{
 		theFrame.setVisible(true);
 		thetimer.start();
 	}
-
+	
 	// Main Method
 	public static void main(String[] args){
 		new come();

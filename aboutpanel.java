@@ -12,10 +12,21 @@ public class aboutpanel extends JPanel{
 	}
 	// Constructor
 	public aboutpanel(){
-		try{
-			imgAbout = ImageIO.read(new File("aboutpage.png"));
-		}catch(IOException e){
-			System.out.println("cannot load image");
+		InputStream imageclass = null;
+		imageclass = this.getClass().getResourceAsStream("aboutpage.png");
+		if(imageclass != null){
+			try{
+				imgAbout = ImageIO.read(imageclass);
+			}catch(IOException e){
+				System.out.println("cannot load jar image");
+			}
+		}
+		if(imgAbout == null){
+			try{
+				imgAbout = ImageIO.read(new File("aboutpage.png"));
+			}catch(IOException e){
+				System.out.println("cannot load image");
+			}
 		}
 	}
 }

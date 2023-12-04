@@ -14,12 +14,21 @@ public class quizpanel extends JPanel{
 	}
 	// Constructor
 	public quizpanel(){
-		try{
-			imgQuiz = ImageIO.read(new File("quizformula.png"));
-		}catch(IOException e){
-			System.out.println("cannot load image");
+		InputStream imageclass = null;
+		imageclass = this.getClass().getResourceAsStream("quizformula.png");
+		if(imageclass != null){
+			try{
+				imgQuiz = ImageIO.read(imageclass);
+			}catch(IOException e){
+				System.out.println("cannot load jar image");
+			}
+		}
+		if(imgQuiz == null){
+			try{
+				imgQuiz = ImageIO.read(new File("quizformula.png"));
+			}catch(IOException e){
+				System.out.println("cannot load image");
+			}
 		}
 	}
-
-
 }

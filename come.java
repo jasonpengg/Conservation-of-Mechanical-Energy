@@ -9,7 +9,7 @@ import java.io.*;
 
 public class come implements ActionListener, ChangeListener{
 	//Properties
-	//Frames and panels
+	//Creating Frames and Panels
 	JFrame theFrame = new JFrame("Conservation of Mechanical Energy");
 	ballpanel thePanel = new ballpanel();
 	aboutpanel abtPanel = new aboutpanel();
@@ -37,8 +37,8 @@ public class come implements ActionListener, ChangeListener{
 	JSlider sliderQuizHeight = new JSlider(JSlider.HORIZONTAL, 0, 35, 25);
 	
 	//Labels
-	JLabel vLabel = new JLabel("Enter velocity: ");
-	JLabel mLabel = new JLabel("Enter mass: ");
+	JLabel vLabel = new JLabel("Enter velocity: 12");
+	JLabel mLabel = new JLabel("Enter mass: 25");
 	JLabel hLabel = new JLabel();
 	JLabel maxHLabel = new JLabel();
 	JLabel EkLabel = new JLabel("Intial Kinetic Energy: ");
@@ -48,12 +48,14 @@ public class come implements ActionListener, ChangeListener{
 	JLabel resultLabel = new JLabel("");
 	JLabel scoreLabel = new JLabel();
 	
+	//Creating timers, text area and menu bar
 	Timer thetimer = new Timer(1000/48, this);
 	JTextField nameText = new JTextField();
 	JTextArea scoresText = new JTextArea();
 	JMenuBar theBar = new JMenuBar();
 	
-	int intVel;
+	//Variables 
+	int intVel = 12;
 	int intHeight;
 	double dblMaxHeight; 
 	int intInputHeight;
@@ -90,7 +92,7 @@ public class come implements ActionListener, ChangeListener{
 			scorePanel.setVisible(true);
 			scoresText.setEditable(false);
 			
-			//
+			//Loading highscores from jar file
 			InputStream txtClass = null;
 			txtClass = this.getClass().getClassLoader().getResourceAsStream("/highScores.txt");
 			if(txtClass != null){
@@ -105,9 +107,10 @@ public class come implements ActionListener, ChangeListener{
 					infile.close();
 				}catch(FileNotFoundException e){
 					System.out.println("File not found");
-				}catch (IOException e){
+				}catch(IOException e){
 					System.out.println("File cannot be opened");
 			}
+			//Loading highscores from the txt file 
 			}if(txtClass == null){
 				try{
 					BufferedReader infile = new BufferedReader(new FileReader("highScores.txt"));
@@ -205,20 +208,20 @@ public class come implements ActionListener, ChangeListener{
 			sliderMass.setValue(25);
 		}
 		if(evt.getSource () == thetimer){
-			//This tracks the Height of the ball in (m)
+			//This tracks the height of the ball in (m)
 			thePanel.repaint();
 			hLabel.setText("" + thePanel.dblHeight+ "m");
 			hLabel.setLocation(150, thePanel.intY-95);
-			//Checks if the Height of the ball is at max height of all the other shots
+			//Checks if the height of the ball is at max height of all the other shots
 			if(thePanel.dblHeight >= dblMaxHeight ){
 				dblMaxHeight = thePanel.dblHeight;
 				maxHLabel.setText ("" + dblMaxHeight+ "m (MaxHeight)");
 				maxHLabel.setLocation(300, thePanel.intYMax-95);
 				maxHLabel.setForeground(Color.BLUE);
-			//Checks if the Height of the ball is max height of the first launch
+			//Checks if the height of the ball is max height of the first launch
 			}if(thePanel.blnMaxHeight == true){
 				maxHLabel.setVisible(true);
-			//Intially sets the label invisible, also used if the reset button is clicked
+			//Initially sets the label invisible, also used if the reset button is clicked
 			}else{
 				maxHLabel.setVisible(false);	
 			}
@@ -251,7 +254,7 @@ public class come implements ActionListener, ChangeListener{
 		resetButton.addActionListener(this);
 		thePanel.add(resetButton);
 		
-		// Slider
+		// Sliders
 		sliderVel.setBackground(Color.WHITE);
 		sliderVel.setBounds(670, 180, 200, 50);
 		sliderVel.setLocation(670,100);
@@ -260,6 +263,7 @@ public class come implements ActionListener, ChangeListener{
 		sliderVel.setPaintTicks(true);
 		sliderVel.setPaintLabels(true);
 		theFrame.setVisible(true);
+		sliderVel.setValue(12);
 		sliderVel.addChangeListener(this);
 		thePanel.add(sliderVel);
 		
@@ -269,6 +273,7 @@ public class come implements ActionListener, ChangeListener{
 		sliderMass.setMinorTickSpacing(2);
 		sliderMass.setPaintTicks(true);
 		sliderMass.setPaintLabels(true);
+		sliderMass.setValue(25);
 		theFrame.setVisible(true);
 		sliderMass.addChangeListener(this);
 		thePanel.add(sliderMass);
@@ -306,7 +311,7 @@ public class come implements ActionListener, ChangeListener{
 		testPanel.setPreferredSize(new Dimension(960, 540));
 		testPanel.setBackground(Color.WHITE);
 
-		//Slider
+		//Slider for quiz
 		sliderQuizHeight.setBackground(Color.WHITE);
 		sliderQuizHeight.setBounds(670, 180, 200, 50);
 		sliderQuizHeight.setLocation(670,100);
@@ -318,7 +323,7 @@ public class come implements ActionListener, ChangeListener{
 		sliderQuizHeight.addChangeListener(this);
 		testPanel.add(sliderQuizHeight);
 
-		//Labels
+		//Labels for quiz
 		QLabel.setSize(400, 120);
 		QLabel.setLocation(50, 40);
 		testPanel.add(QLabel);
@@ -339,7 +344,7 @@ public class come implements ActionListener, ChangeListener{
 		scoreLabel.setLocation(50,130);
 		testPanel.add(scoreLabel);
 		
-		//Buttons
+		//Buttons for quiz
 		submitButton.setSize(190, 40);
 		submitButton.setLocation(670, 200);
 		submitButton.addActionListener(this);

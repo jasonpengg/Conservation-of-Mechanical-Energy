@@ -8,7 +8,6 @@ public class ballpanel extends JPanel{
 	// Properties 
 	int intX = 100;
 	int intY = 400;
-
 	int intVel = 0;
 	double dblTime = 0;
 	double dblFPS = 0;
@@ -33,7 +32,7 @@ public class ballpanel extends JPanel{
 
 		// Height in Metres (for label)
 		dblHeight = -Math.round((4.9*dblTime*dblTime + intVel*dblTime)*100.0)/100.0;
-		//Position for X-Y Coord for planting ball and lines, converts to int
+		//Position for X-Y Coordinates for planting ball and lines, converts to int
 		dblPosition = (4.9*dblTime*dblTime + intVel*dblTime)*10;
 		intY = 400 + (int)Math.round(dblPosition);
 		
@@ -73,7 +72,7 @@ public class ballpanel extends JPanel{
 		if(imgRuler == null){
 			try{
 				imgRuler = ImageIO.read(new File("35m.png"));
-			}catch (IOException e){
+			}catch(IOException e){
 				System.out.println("Unable to load image");
 			}
 		}

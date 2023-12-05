@@ -32,7 +32,6 @@ public class ballpanel extends JPanel{
 
 		// Height in Metres (for label)
 		dblHeight = -Math.round((4.9*dblTime*dblTime + intVel*dblTime)*100.0)/100.0;
-		//Position for X-Y Coordinates for planting ball and lines, converts to int
 		dblPosition = (4.9*dblTime*dblTime + intVel*dblTime)*10;
 		intY = 400 + (int)Math.round(dblPosition);
 		

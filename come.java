@@ -166,7 +166,6 @@ public class come implements ActionListener, ChangeListener{
 		}
 		if(evt.getSource()== endButton){
 			//Disables buttons and guides user to enter their name 
-			System.out.println("End");
 			System.out.println(intScore);
 			submitButton.setEnabled(false);
 			questionButton.setEnabled(false);

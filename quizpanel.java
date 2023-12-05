@@ -5,8 +5,10 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 public class quizpanel extends JPanel{
+	//Properties
 	BufferedImage imgQuiz = null;
 	
+	//Methods
 	public void paintComponent(Graphics g){
 		g.setColor(Color.WHITE);
 		g.fillRect(0,0,960, 540);
@@ -20,14 +22,14 @@ public class quizpanel extends JPanel{
 			try{
 				imgQuiz = ImageIO.read(imageclass);
 			}catch(IOException e){
-				System.out.println("cannot load jar image");
+				System.out.println("Unable to load image file from jar");
 			}
 		}
 		if(imgQuiz == null){
 			try{
 				imgQuiz = ImageIO.read(new File("quizformula.png"));
 			}catch(IOException e){
-				System.out.println("cannot load image");
+				System.out.println("Unable to load image");
 			}
 		}
 	}

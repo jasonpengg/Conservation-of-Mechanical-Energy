@@ -89,19 +89,40 @@ public class come implements ActionListener, ChangeListener{
 			scoresText.setText("");
 			scorePanel.setVisible(true);
 			scoresText.setEditable(false);
-			try{
-				BufferedReader infile = new BufferedReader(new FileReader("highScores.txt"));
-				String strLine = "";
-				strLine = infile.readLine();
-				while(strLine != null){
-					scoresText.append(strLine+"\n");
+			
+			//
+			InputStream txtClass = null;
+			txtClass = this.getClass().getClassLoader().getResourceAsStream("/highScores.txt");
+			if(txtClass != null){
+				try{
+					BufferedReader infile = new BufferedReader(new InputStreamReader(txtClass));
+					String strLine = "";
 					strLine = infile.readLine();
+					while(strLine != null){
+						scoresText.append(strLine+"\n");
+						strLine = infile.readLine();
+					}
+					infile.close();
+				}catch(FileNotFoundException e){
+					System.out.println("File not found");
+				}catch (IOException e){
+					System.out.println("File cannot be opened");
+			}
+			}if(txtClass == null){
+				try{
+					BufferedReader infile = new BufferedReader(new FileReader("highScores.txt"));
+					String strLine = "";
+					strLine = infile.readLine();
+					while(strLine != null){
+						scoresText.append(strLine+"\n");
+						strLine = infile.readLine();
+					}
+					infile.close();
+				}catch(FileNotFoundException e){
+					System.out.println("File not found");
+				}catch (IOException e){
+					System.out.println("File cannot be opened");
 				}
-				infile.close();
-			}catch(FileNotFoundException e){
-				System.out.println("File not found");
-			}catch (IOException e){
-				System.out.println("File cannot be opened");
 			}
 		}
 //---------------------------------------------------------------QUIZ PANEL---------------------------------------------------------------------
@@ -352,7 +373,6 @@ public class come implements ActionListener, ChangeListener{
 		scorePanel.add(scoresText);
 		//-------------------------------------------------------------------GENERAL FRAME-------------------------------------------------------------------------------//
 		
-
 		aboutMenu.addActionListener(this);
 		helpMenu.addActionListener(this);
 		mainMenu.addActionListener(this);

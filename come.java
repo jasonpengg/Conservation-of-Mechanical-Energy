@@ -41,7 +41,7 @@ public class come implements ActionListener, ChangeListener{
 	JLabel mLabel = new JLabel("Enter mass: 25");
 	JLabel hLabel = new JLabel();
 	JLabel maxHLabel = new JLabel();
-	JLabel EkLabel = new JLabel("Intial Kinetic Energy: ");
+	JLabel EkLabel = new JLabel("Initial Kinetic Energy: ");
 	JLabel QLabel = new JLabel();
 	JLabel QLabel2 = new JLabel();
 	JLabel QHLabel = new JLabel("Enter Height: ");
@@ -231,7 +231,7 @@ public class come implements ActionListener, ChangeListener{
 		//Get slider values
 		this.intVel = sliderVel.getValue();
 		this.intInputHeight = sliderQuizHeight.getValue();
-		EkLabel.setText ("Intial Kinetic Energy: "+(0.5 * sliderMass.getValue() * intVel*intVel) +"J");
+		EkLabel.setText ("Initial Kinetic Energy: "+(0.5 * sliderMass.getValue() * intVel*intVel) +"J");
 		vLabel.setText("Enter velocity: " +intVel);
 		mLabel.setText("Enter mass: " +sliderMass.getValue());
 		QHLabel.setText("Enter Height: " +intInputHeight +"m");

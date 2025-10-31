@@ -2,10 +2,10 @@
 // Version 1.0
 // Conservation of Mechanical Energy
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
-import javax.swing.event.*;
 import java.io.*;
+import javax.swing.*;
+import javax.swing.event.*;
 
 public class come implements ActionListener, ChangeListener{
 	//Properties
@@ -278,7 +278,7 @@ public class come implements ActionListener, ChangeListener{
 		thePanel.add(sliderMass);
 		
 		// Labels
-		vLabel.setSize(100, 100);
+		vLabel.setSize(150, 100);
 		vLabel.setLocation(675, 40);
 		thePanel.add(vLabel);
 		
